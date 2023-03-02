@@ -1,0 +1,7 @@
+/* for future use */
+.gilding {
+  background-image: url('/static/imgs/calfskin-texture.jpg');
+  background-attachment: local;
+  background-repeat: round;
+  background-blend-mode: color-burn;
+}
