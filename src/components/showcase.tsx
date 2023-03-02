@@ -101,7 +101,7 @@ export default function Showcase() {
                   <h3 className="font-body text-3xl font-semibold text-shadow">
                     <Link
                       className="hover:border-b-2 hover:border-blue-500"
-                      href="https://github.com/aretrace/inventory"
+                      href="https://github.com/aretrace/Inventory"
                       target="_blank"
                     >
                       Inventory
