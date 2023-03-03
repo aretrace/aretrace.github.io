@@ -53,7 +53,7 @@ export default function Showcase() {
                   <h3 className='font-body text-3xl font-semibold text-shadow'>
                     <Link
                       className='hover:border-b-2 hover:border-blue-500'
-                      href='https://cueiz.vercel.app'
+                      href='https://cueiz.vercel.app/quiz'
                       target='_blank'
                     >
                       Cueiz
