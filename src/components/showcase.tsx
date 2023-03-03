@@ -66,8 +66,8 @@ export default function Showcase() {
                     <img
                       className='inline-block'
                       src='/static/icons/svg/typescript-w.svg'
-                      title='Javascript'
-                      alt='Javascript icon'
+                      title='Typescript'
+                      alt='Typescript icon'
                       width='28'
                       height='28'
                     />
