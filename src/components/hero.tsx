@@ -1,47 +1,41 @@
-// prettier-ignore
 'use client'
-
 import { autoUpdate, flip, useFloating } from '@floating-ui/react'
 import { ArrowUpRightIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-import { BaseSyntheticEvent, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Hero() {
-  const { x, y, reference, floating, strategy, refs, isPositioned } = useFloating({
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => setIsHovered(true)
+  const handleMouseLeave = () => setIsHovered(false)
+
+  const beInvisibleCN = isHovered ? '' : 'invisible'
+
+  const { x, y, strategy, refs, isPositioned } = useFloating({
     placement: 'top',
     middleware: [flip()],
     whileElementsMounted: autoUpdate,
   })
 
-  const heroText = refs.reference.current as HTMLParagraphElement
-  const heroTooltip = refs.floating.current as HTMLDivElement
-
-  useEffect(
-    function initialHeroTooltipPopUp() {
-      if (isPositioned) {
-        heroTooltip.classList.remove('invisible')
-        setTimeout(() => {
-          heroTooltip.classList.add('invisible')
-        }, 2543)
-      }
-    },
-    [isPositioned]
-  )
-
-  function handleMouseEnter(e: BaseSyntheticEvent) {
-    heroTooltip.classList.remove('invisible')
-  }
-
-  function handleMouseLeave(e: BaseSyntheticEvent) {
-    heroTooltip.classList.add('invisible')
-  }
+  // show popup when positioned on component mount
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    if (isPositioned) {
+      setIsHovered(true)
+      timer = setTimeout(() => {
+        setIsHovered(false)
+      }, 2543)
+    }
+    return () => clearTimeout(timer)
+  }, [isPositioned])
 
   return (
     <>
       <div className="flex h-full items-center justify-center">
         <div
-          ref={floating}
-          className="invisible rounded bg-gray-900 px-2 py-1 font-sans text-sm text-yellow-50"
+          ref={refs.setFloating}
+          className={`${beInvisibleCN} rounded bg-black px-2 py-1 font-sans text-md text-yellow-50`}
           style={{
             position: strategy,
             top: y ?? 0,
@@ -53,7 +47,7 @@ export default function Hero() {
           <ArrowUpRightIcon className="-mr-1 inline-block h-6 w-5" />
         </div>
         <p
-          ref={reference}
+          ref={refs.setReference}
           className="text-center font-serif text-[3.75rem] text-shadow sm:text-[4.2] md:text-[5rem] lg:text-[5.6rem] 2xl:text-[6.4rem] min-[1820px]:text-[7.2rem]"
         >
           <Link

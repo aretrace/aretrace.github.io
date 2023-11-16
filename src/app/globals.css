@@ -12,7 +12,7 @@
 html,
 body {
   /* dvh for a UI that auto-stretches as the UA interface changes */
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
 }

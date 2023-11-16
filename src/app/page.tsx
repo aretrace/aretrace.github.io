@@ -3,7 +3,7 @@ import Showcase from '../components/showcase'
 
 export default function HomePage() {
   return (
-    <main className="mx-auto flex min-h-full max-w-screen-2xl flex-col justify-center lg:flex-row lg:pb-8">
+    <main className="mx-auto flex min-h-[inherit] max-w-screen-2xl flex-col justify-center lg:flex-row lg:pb-[4%]">
       <section className="flex flex-1 basis-6/12 flex-col lg:my-0 lg:flex-row">
         <div className="flex-1 mb-9 mt-14 lg:my-0">
           <Hero />

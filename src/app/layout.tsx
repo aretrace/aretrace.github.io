@@ -5,12 +5,15 @@ import localFonts from 'next/font/local'
 
 import styles from './styles.module.css'
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: 'no',
+}
+
 export const metadata = {
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
   title: 'ᓚᘏᗢ',
   description: 'Transforming Ideas Into Reality',
   icons: {
