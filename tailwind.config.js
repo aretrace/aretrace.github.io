@@ -16,7 +16,8 @@ module.exports = {
         body: ['var(--font-eb-garamond)'],
       },
       textShadow: {
-        DEFAULT: '1px 1px 0 rgb(0 0 0 / 25%)', // change to var(--tw-some-var)
+        // 1px 1px 0 rgb(0 0 0 / 25%)
+        DEFAULT: '-0.33px -0.33px 1px rgb(0 0 0 / 25%)', // change to var(--tw-some-var)
       },
     },
   },
@@ -28,7 +29,7 @@ module.exports = {
             textShadow: value,
           }),
         },
-        { values: theme('textShadow') }
+        { values: theme('textShadow') },
       )
     }),
     require('tailwind-scrollbar-hide'),

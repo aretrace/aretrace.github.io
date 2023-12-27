@@ -1,260 +1,124 @@
-// prettier-ignore
 'use client'
 
-import img from 'next/image'
+import { useFloating, offset, flip, shift, autoUpdate, useHover, useInteractions, inline } from '@floating-ui/react'
 import Link from 'next/link'
-import { BaseSyntheticEvent } from 'react'
-
-import Card from './card/card'
+import { Fragment, useState } from 'react'
+import TechTag from './tech-tag'
+import Image from 'next/image'
 
 export default function Showcase() {
-  // const [isPageFullyLoaded, setIsPageFullyLoaded] = useState(false)
+  return (
+    <menu className="flex flex-col gap-4">
+      {/* prettier-ignore */}
+      <ul
+        className="contents
+        [&_.tag-group]:flex [&_.tag-group]:flex-wrap [&_.tag-group]:gap-1 [&_.tag-group]:w-[34ch]
+        [&_h2]:inline [&_h2]:font-body [&_h2]:text-[2.22rem] [&_h2]:font-medium [&_h2]:text-stone-800 [&_h2]:leading-3
+        [&_h2]:text-shadow
+        [&_p]:pb-1 [&_p]:pl-[0.26ch] [&_p]:font-body [&_p]:text-xl [&_p]:font-medium [&_p]:text-zinc-700
+        [&_p]:text-shadow
+        [&_.link-arrow]:text-2xl"
+      >
+        <ShowItem title="Cueiz" description="Trivia Next.js app" photo="Cueiz">
+          <ul className="tag-group">
+            <TechTag logo={'typescript'} text="Typescript" />
+            <TechTag logo={'react'} text="React.js" />
+            <TechTag logo={'next'} text="Next.js" />
+            <TechTag logo={'rest'} text="REST API" />
+            <TechTag logo={'tailwind'} text="Tailwind CSS" />
+          </ul>
+        </ShowItem>
+        <ShowItem title="Inventory" description="JavaFX app for inventory management" photo="Inventory">
+          <ul className="tag-group">
+            <TechTag logo={'java'} text="Java" />
+            <TechTag logo={'maven'} text="Maven" />
+            <TechTag logo={'docker'} text="Docker" />
+            <TechTag logo={'devops'} text="DevOps" />
+            <TechTag logo={'web'} text="Via Browser" />
+          </ul>
+        </ShowItem>
+        <ShowItem title="AppointEase" description="JavaFX app for appointments" photo="AppointEase">
+          <ul className="tag-group">
+            <TechTag logo={'java'} text="Java" />
+            <TechTag logo={'sql'} text="SQL" />
+            <TechTag logo={'design'} text="Design" />
+          </ul>
+        </ShowItem>
+        <ShowItem title="hncr-cli" description="Hacker News CLI client written in Crystal" photo="hncr-cli">
+          <ul className="tag-group">
+            <TechTag logo={'crystal'} text="Crystal" />
+            <TechTag logo={'command-line'} text="CLI" />
+            <TechTag logo={'rest'} text="REST API" />
+          </ul>
+        </ShowItem>
+      </ul>
+    </menu>
+  )
+}
 
-  // target = element that triggered event; currentTarget = element that has event listener attached
-  function handleClick(e: BaseSyntheticEvent) {
-    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })
-  }
+function ShowItem({
+  children,
+  title,
+  description,
+  photo,
+}: {
+  children: React.ReactNode
+  title: string
+  description: string
+  photo: string
+}) {
+  const [isOpen, setIsOpen] = useState(false)
 
-  // useLayoutEffect(() => {
-  //   window.addEventListener('load', () => {
-  //     setIsPageFullyLoaded(true)
-  //   })
-  // }, [isPageFullyLoaded])
+  const { refs, floatingStyles, context, isPositioned } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: 'top',
+    middleware: [offset({ crossAxis: -30 }), flip(), shift(), inline()],
+    whileElementsMounted: autoUpdate,
+  })
+
+  const hover = useHover(context, {
+    mouseOnly: true,
+    restMs: 150,
+    delay: {
+      open: 200,
+      close: 0,
+    },
+  })
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([hover])
 
   return (
-    <>
-      <div className='mt-8 flex h-full flex-col justify-around gap-8 lg:mt-0 lg:justify-center'>
-        <div className='flex flex-initial items-center justify-evenly'>
-          <h2 className='font-serif text-[1.85rem] text-shadow'>
-            Examples<span className='text-[1.6rem]'> 👇</span>
-          </h2>
-          <span className='font-serif text-[1.84rem] text-shadow '>
-            <Link
-              href='https://github.com/aretrace'
-              className='hover:border-b-2 hover:border-blue-500'
-              target='_blank'
-            >
-              View More
-              <img
-                className='-mr-1 ml-1 mb-1 inline-block'
-                src='/static/icons/svg/github.svg'
-                alt='Github logo'
-                width={28}
-                height={32}
-              />
-            </Link>
-          </span>
-        </div>
-        <div className='mb-8 lg:mb-0'>
-          <ul className='flex h-full w-full snap-x snap-mandatory items-center gap-6 overflow-x-auto px-[50%] scrollbar-hide lg:flex-wrap lg:justify-center lg:overflow-visible lg:px-0'>
-            <div className='contents [&>li]:h-[400px] [&>li]:w-[75vw] [&>li]:flex-none [&>li]:lg:h-[215px] [&>li]:lg:w-[min(45%,320px)] '>
-              <li className='snap-center snap-always' onClick={handleClick}>
-                <Card img='/static/imgs/Cueiz.jpeg' alt=''>
-                  <h3 className='font-body text-3xl font-semibold text-shadow'>
-                    <Link
-                      className='hover:border-b-2 hover:border-blue-500'
-                      href='https://cueiz.vercel.app/quiz'
-                      target='_blank'
-                    >
-                      Cueiz
-                    </Link>
-                  </h3>
-                  <p className='my-1 font-serif text-xl text-shadow'>
-                    Trivia Next.js app
-                  </p>
-                  <div className='flex gap-4 overflow-x-scroll pt-1 scrollbar-hide'>
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/typescript-w.svg'
-                      title='Typescript'
-                      alt='Typescript icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/react-w.svg'
-                      title='React.js'
-                      alt='React.js icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block scale-95'
-                      src='/static/icons/svg/next-w.svg'
-                      title='Next.js'
-                      alt='Next.js icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block scale-150'
-                      src='/static/icons/svg/rest-w.svg'
-                      title='REST API'
-                      alt='REST API icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/tailwind-w.svg'
-                      title='Tailwind CSS'
-                      alt='Tailwind CSS icon'
-                      width='28'
-                      height='28'
-                    />
-                  </div>
-                </Card>
-              </li>
-              <li className='snap-center snap-always' onClick={handleClick}>
-                <Card
-                  img='/static/imgs/Inventory.jpeg'
-                  alt='Inventory JavaFX Application'
-                >
-                  <h3 className='font-body text-3xl font-semibold text-shadow'>
-                    <Link
-                      className='hover:border-b-2 hover:border-blue-500'
-                      href='https://inventory-wq4jlkdw5a-uw.a.run.app'
-                      target='_blank'
-                    >
-                      Inventory
-                    </Link>
-                  </h3>
-                  <p className='my-1 font-serif text-xl text-shadow'>
-                    JavaFX app for inventory management
-                  </p>
-                  <div className='flex gap-4 overflow-x-scroll pt-1 scrollbar-hide'>
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/java-w.svg'
-                      title='Java'
-                      alt='Java icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/maven-w.svg'
-                      title='Maven'
-                      alt='Maven icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/docker-w.svg'
-                      title='Docker'
-                      alt='Docker icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/devops-w.svg'
-                      title='DevOps'
-                      alt='DevOps icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/web-w.svg'
-                      title='Web Tech'
-                      alt='Web Tech icon'
-                      width='28'
-                      height='28'
-                    />
-                  </div>
-                </Card>
-              </li>
-              <li className='snap-center snap-always' onClick={handleClick}>
-                <Card img='/static/imgs/AppointEase.jpeg' alt=''>
-                  <h3 className='font-body text-3xl font-semibold text-shadow'>
-                    <Link
-                      className='hover:border-b-2 hover:border-blue-500'
-                      href='https://github.com/aretrace/appointease'
-                      target='_blank'
-                    >
-                      AppointEase
-                    </Link>
-                  </h3>
-                  <p className='my-1 font-serif text-xl text-shadow'>
-                    JavaFX app for appointments
-                  </p>
-                  <div className='flex gap-4 overflow-x-scroll pt-1 scrollbar-hide'>
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/java-w.svg'
-                      title='Java'
-                      alt='Java icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/sql-w.svg'
-                      title='MySQL'
-                      alt='SQL icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block'
-                      src='/static/icons/svg/design-w.svg'
-                      title='UX'
-                      alt='Design icon'
-                      width='28'
-                      height='28'
-                    />
-                  </div>
-                </Card>
-              </li>
-              <li className='snap-center snap-always' onClick={handleClick}>
-                <Card img='/static/imgs/hncr-cli.jpeg' alt=''>
-                  <h3 className='font-body text-3xl font-semibold text-shadow'>
-                    <Link
-                      className='hover:border-b-2 hover:border-blue-500'
-                      href='https://github.com/aretrace/hncr-cli'
-                      target='_blank'
-                    >
-                      hncr-cli
-                    </Link>
-                  </h3>
-                  <p className='my-1 font-serif text-xl text-shadow'>
-                    Hacker News CLI client written in Crystal
-                  </p>
-                  <div className='flex gap-4 overflow-x-scroll pt-1 scrollbar-hide'>
-                    <img
-                      className='inline-block scale-125'
-                      src='/static/icons/svg/crystal-w.svg'
-                      title='Crystal'
-                      alt='Crystal icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='-ml-1 inline-block'
-                      src='/static/icons/svg/command-line-w.svg'
-                      title='Command line'
-                      alt='Command line icon'
-                      width='28'
-                      height='28'
-                    />
-                    <img
-                      className='inline-block scale-150'
-                      src='/static/icons/svg/rest-w.svg'
-                      title='REST API'
-                      alt='REST API icon'
-                      width='28'
-                      height='28'
-                    />
-                  </div>
-                </Card>
-              </li>
-            </div>
-          </ul>
-        </div>
+    <li>
+      {isOpen && (
+        <Image
+          className={`z-10 rounded border-4 border-stone-700`}
+          src={`/static/imgs/${photo}.jpeg`}
+          ref={refs.setFloating}
+          style={floatingStyles}
+          {...getFloatingProps()}
+          alt={`${title} image`}
+          width={288}
+          height={1}
+        />
+      )}
+      <div
+        className="-mb-1 text-2xl font-semibold hover:after:content-['_↗']"
+        ref={refs.setReference}
+        {...getReferenceProps()}
+      >
+        <h2 className="">
+          <Link href="https://cueiz.vercel.app/quiz" target="_blank">
+            {title}
+          </Link>
+        </h2>
       </div>
-    </>
-  );
+      <p>
+        {description}
+        <br />
+      </p>
+      {/* Tech Tags */}
+      <div className="mb-2">{children}</div>
+    </li>
+  )
 }
