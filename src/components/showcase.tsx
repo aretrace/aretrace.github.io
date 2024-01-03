@@ -1,10 +1,10 @@
 'use client'
 
-import { useFloating, offset, flip, shift, autoUpdate, useHover, useInteractions, inline } from '@floating-ui/react'
-import Link from 'next/link'
-import { Fragment, useState } from 'react'
-import TechTag from './tech-tag'
+import { autoUpdate, flip, inline, offset, shift, useFloating, useHover, useInteractions } from '@floating-ui/react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import TechTag from './tech-tag'
 
 export default function Showcase() {
   return (
@@ -19,7 +19,7 @@ export default function Showcase() {
         [&_p]:text-shadow
         [&_.link-arrow]:text-2xl"
       >
-        <ShowItem title="Cueiz" description="Trivia Next.js app" photo="Cueiz">
+        <ShowItem title="Cueiz" link="https://cueiz.vercel.app/quiz" description="Trivia Next.js app" photo="Cueiz">
           <ul className="tag-group">
             <TechTag logo={'typescript'} text="Typescript" />
             <TechTag logo={'react'} text="React.js" />
@@ -28,7 +28,7 @@ export default function Showcase() {
             <TechTag logo={'tailwind'} text="Tailwind CSS" />
           </ul>
         </ShowItem>
-        <ShowItem title="Inventory" description="JavaFX app for inventory management" photo="Inventory">
+        <ShowItem title="Inventory" link="https://inventory-wq4jlkdw5a-uw.a.run.app/" description="JavaFX app for inventory management" photo="Inventory">
           <ul className="tag-group">
             <TechTag logo={'java'} text="Java" />
             <TechTag logo={'maven'} text="Maven" />
@@ -37,14 +37,14 @@ export default function Showcase() {
             <TechTag logo={'web'} text="Via Browser" />
           </ul>
         </ShowItem>
-        <ShowItem title="AppointEase" description="JavaFX app for appointments" photo="AppointEase">
+        <ShowItem title="AppointEase" link="https://github.com/aretrace/AppointEase" description="JavaFX app for appointments" photo="AppointEase">
           <ul className="tag-group">
             <TechTag logo={'java'} text="Java" />
             <TechTag logo={'sql'} text="SQL" />
             <TechTag logo={'design'} text="Design" />
           </ul>
         </ShowItem>
-        <ShowItem title="hncr-cli" description="Hacker News CLI client written in Crystal" photo="hncr-cli">
+        <ShowItem title="hncr-cli" link="https://github.com/aretrace/AppointEase" description="Hacker News CLI client written in Crystal" photo="hncr-cli">
           <ul className="tag-group">
             <TechTag logo={'crystal'} text="Crystal" />
             <TechTag logo={'command-line'} text="CLI" />
@@ -57,11 +57,13 @@ export default function Showcase() {
 }
 
 function ShowItem({
+  link,
   children,
   title,
   description,
   photo,
 }: {
+  link: string
   children: React.ReactNode
   title: string
   description: string
@@ -92,7 +94,7 @@ function ShowItem({
     <li>
       {isOpen && (
         <Image
-          className={`z-10 rounded border-4 border-stone-700`}
+          className={`z-10 hidden rounded border-4 border-stone-700 lg:block`}
           src={`/static/imgs/${photo}.jpeg`}
           ref={refs.setFloating}
           style={floatingStyles}
@@ -108,7 +110,7 @@ function ShowItem({
         {...getReferenceProps()}
       >
         <h2 className="">
-          <Link href="https://cueiz.vercel.app/quiz" target="_blank">
+          <Link href={`${link}`} target="_blank">
             {title}
           </Link>
         </h2>

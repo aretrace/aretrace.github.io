@@ -48,7 +48,7 @@ export default function Hero() {
         </div>
         <h1
           ref={refs.setReference}
-          className="text-stone-950 text-center font-serif text-[3.75rem] text-shadow sm:text-[4.2] md:text-[5rem] lg:text-[5.6rem] 2xl:text-[6.4rem] min-[1820px]:text-[7.2rem]"
+          className="text-stone-950 text-center font-serif text-[3.75rem] text-shadow sm:text-[4.2] md:text-[5.4rem] lg:text-[6rem] 2xl:text-[6.4rem] min-[1820px]:text-[7.2rem]"
         >
           <Link
             href="https://cal.com/rtrace"

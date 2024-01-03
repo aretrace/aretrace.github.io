@@ -1,7 +1,7 @@
 .foxed {
   background-image: url('/static/imgs/vellum-texture.png'),
-   linear-gradient(166deg, #e2e8f0, #cbe7d8, #fffdc0, #fdeaae, #fcc385, #f8a45a); /* #fb8c37 */
-  background-size: 105px, cover;
+   linear-gradient(162deg, #e2e8f0, #cbe7d8, #fffdc0, #fdeaae, #fcc385, #f8a45a); /* #fb8c37 */
+  background-size: 98px, cover;
   background-repeat: repeat, no-repeat;
   background-blend-mode: multiply;
 }
