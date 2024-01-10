@@ -93,7 +93,7 @@ function ShowItem({
   return (
     <li>
       {isOpen && (
-        <Image
+        <img
           className={`z-10 hidden rounded border-4 border-stone-700 lg:block`}
           src={`/static/imgs/${photo}.jpeg`}
           ref={refs.setFloating}
