@@ -95,7 +95,7 @@ function ShowItem({
       {isOpen && (
         <img
           className={`z-10 hidden rounded border-4 border-stone-700 lg:block`}
-          src={`/static/imgs/${photo}.jpeg`}
+          src={`/static/imgs/${photo}.webp`}
           ref={refs.setFloating}
           style={floatingStyles}
           {...getFloatingProps()}
