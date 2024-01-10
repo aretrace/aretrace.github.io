@@ -101,7 +101,6 @@ function ShowItem({
           {...getFloatingProps()}
           alt={`${title} image`}
           width={288}
-          height={1}
         />
       )}
       <div
